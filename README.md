@@ -1,14 +1,8 @@
-# oci-k8s-terraform-ansible
-Efficiently Deploy a Kubernetes Cluster on Oracle Cloud Infrastructure (OCI) using Terraform and Ansible: Practical Examples
-
-# Not Complete yet
-1. iaas component <- completed
-2. acl setting <- not completed
-3. application configuration (ansible) <-- not completed
+# terraform-gitops
 
 ## Requirements
 
-1. save file '~/.oci/config' link:https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm
+1. save file '<prod,dev ..>/secrets/secret.tfvars'
 ```
 user=${USER_ID}
 fingerprint=${FINGERPRINT}
@@ -39,19 +33,5 @@ terraform plan
 ```
 3. apply
 ```shell
-terraform apply --auto-approve
-```
-
-## Diagram (free-tier)
-<img src="./images/diagram.png" >
-
-```scss
-
-┌─────────────────────┐  ┌───────────────────┐
-│ Control Plane Node  │  │  Worker Node      │
-│   (VM)              │  │    (VM)           │
-│   Arm, 2 cores      │  │    Arm, 2 cores   │ 
-│   4GB RAM           │  │    8GB RAM        │
-│   100GB Volume      │  │    100GB Volume   │
-└─────────────────────┘  └───────────────────┘
+terraform apply -var-file="./secrets/secrets.tfvars"
 ```

@@ -6,11 +6,11 @@ variable "compartment_id" {
 # metadata
 variable "ssh_public_key_path" {
   type = string
-  default = "~/.ssh/id_rsa.pub"
+  default = "./secrets/public.key"
 }
 variable "ssh_private_key_path" {
   type = string
-  default = "~/.ssh/id_rsa.key"
+  default = "./secrets/private.key"
 }
 
 # control_plane
