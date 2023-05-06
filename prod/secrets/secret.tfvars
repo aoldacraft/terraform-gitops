@@ -1,6 +1,0 @@
-tenancy_ocid     = "ocid1.tenancy.oc1..exampleuniqueid"
-user_ocid        = "ocid1.user.oc1..exampleuniqueid"
-private_key_path = "/path/to/your/private_key.pem"
-fingerprint      = "12:34:56:78:90:ab:cd:ef:12:34:56:78:90:ab:cd:ef"
-region           = "us-ashburn-1"
-compartment_id = "ocid1.tenancy.oc1..asdhqwdq22"
