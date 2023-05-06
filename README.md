@@ -9,7 +9,10 @@ fingerprint=${FINGERPRINT}
 tenancy=${TENANCY_ID}
 region=${REGION_ID}
 key_file=${PRIVATE_KEY_FILE_PATH}
+compartment_id = ${COMPARTMENT_ID}
 ```
+
+2. save file '<prod,dev ..>/secrets/<private.key, public.key>'
 
 ## Execute
 1. init
@@ -19,11 +22,6 @@ terraform init
 ```
 2. write ./{prod,dev}/terraform.tfvars
 ```text
-compartment_id = "ocid1.tenancy.oc1..aaaafeqfoqemfiop13..."
-
-ssh_public_key_path = "~/Documents/secrets/ssh/minshigee.key.pub"
-ssh_private_key_path= "~/Documents/secrets/ssh/minshigee.key"
-
 control_plane_count = 1
 worker_count = 1
 ```
