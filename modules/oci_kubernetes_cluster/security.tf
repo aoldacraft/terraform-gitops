@@ -7,7 +7,7 @@ locals {
 }
 
 resource "oci_core_network_security_group" "kubernetes_control_plane" {
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   vcn_id         = oci_core_vcn.main_vcn.id
   display_name = "kubernetes_control_plane_sg"
 }
@@ -75,7 +75,7 @@ resource "oci_core_network_security_group_security_rule" "scheduler-api" {
 
 
 resource "oci_core_network_security_group" "kubernetes_node" {
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   vcn_id         = oci_core_vcn.main_vcn.id
   display_name = "kubernetes_node_sg"
 }
@@ -132,7 +132,7 @@ resource "oci_core_network_security_group_security_rule" "nodeport_udp" {
   count = length(local.cidr_s)
   direction = "INGRESS"
   network_security_group_id = oci_core_network_security_group.kubernetes_node.id
-  protocol = "17" # TCP protocol
+  protocol = "17" # UDP protocol
   source = local.cidr_s[count.index]
   udp_options {
     destination_port_range {
@@ -160,7 +160,7 @@ resource "oci_core_network_security_group_security_rule" "calico_vxlan" {
   count = length(local.cidr_s)
   direction = "INGRESS"
   network_security_group_id = oci_core_network_security_group.kubernetes_node.id
-  protocol = "17" # TCP protocol
+  protocol = "17" # UDP protocol
   source = local.cidr_s[count.index]
   udp_options {
     destination_port_range {
@@ -188,12 +188,25 @@ resource "oci_core_network_security_group_security_rule" "calico_wireguard_ipv4"
   count = length(local.cidr_s)
   direction = "INGRESS"
   network_security_group_id = oci_core_network_security_group.kubernetes_node.id
-  protocol = "17" # TCP protocol
+  protocol = "17" # UDP protocol
   source = local.cidr_s[count.index]
   udp_options {
     destination_port_range {
       min = 51820
       max = 51820
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "temp" {
+  direction = "INGRESS"
+  network_security_group_id = oci_core_network_security_group.kubernetes_node.id
+  protocol = "17" # UDP protocol
+  source = "0.0.0.0/0"
+  udp_options {
+    destination_port_range {
+      min = 51821
+      max = 60000
     }
   }
 }

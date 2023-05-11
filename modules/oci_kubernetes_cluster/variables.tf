@@ -1,4 +1,4 @@
-variable "compartment_id" {
+variable "tenancy_id" {
   type = string
 }
 
@@ -37,12 +37,10 @@ variable "vcn_display_name" {
 
 variable "vcn_cidr_block" {
   type = string
-  default = "172.1.0.0/16"
 }
 
 variable "control_plane_subnet_cidr_block" {
   type = string
-  default = "172.1.16.0/20"
 }
 
 variable "control_plane_subnet_display_name" {
@@ -52,7 +50,6 @@ variable "control_plane_subnet_display_name" {
 
 variable "worker_subnet_cidr_block" {
   type = string
-  default = "172.1.32.0/20"
 }
 
 variable "worker_subnet_display_name" {
@@ -62,16 +59,11 @@ variable "worker_subnet_display_name" {
 
 variable "public_subnet_cidr_block" {
   type = string
-  default = "172.1.48.0/20"
 }
 
 variable "public_subnet_display_name" {
   type = string
   default = "public"
-}
-
-variable "node_availability_domain" {
-  type = string
 }
 
 ########
@@ -80,7 +72,7 @@ variable "node_availability_domain" {
 
 variable "ssh_public_key_path" {
   type = string
-  default = "~/.ssh/id_rsa.pub"
+  default = "~/.ssh/id_rsa_pub.key"
 }
 
 variable "ssh_private_key_path" {
@@ -127,10 +119,14 @@ variable "arm_node_shape" {
   default = "VM.Standard.A1.Flex"
 }
 
-variable "arm_image_id" {
+variable "arm_image_os_name" {
   type = string
-  default = "ocid1.image.oc1.ap-chuncheon-1.aaaaaaaajq5kz4shjxerevwal6ky4b6xn5vpct62mneuoiawtkb2lt6t2rdq"
-  description = "Canonical-Ubuntu-20.04-aarch64-2023.02.15-0"
+  default = "Canonical Ubuntu"
+}
+
+variable "arm_image_os_version" {
+  type = string
+  default = "20.04"
 }
 
 variable "arm_master_shape_config" {

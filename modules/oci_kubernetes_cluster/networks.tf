@@ -1,5 +1,9 @@
+data "oci_identity_availability_domains" "azs" {
+  compartment_id = oci_identity_compartment.network.compartment_id
+}
+
 resource "oci_core_vcn" "main_vcn" {
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.compartment_id
 
   cidr_block = var.vcn_cidr_block
   display_name = var.vcn_display_name
@@ -8,7 +12,7 @@ resource "oci_core_vcn" "main_vcn" {
 
 resource "oci_core_subnet" "control_plane" {
   cidr_block = var.control_plane_subnet_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   vcn_id = oci_core_vcn.main_vcn.id
   display_name = var.control_plane_subnet_display_name
 
@@ -18,7 +22,7 @@ resource "oci_core_subnet" "control_plane" {
 
 resource "oci_core_subnet" "worker" {
   cidr_block = var.worker_subnet_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   vcn_id = oci_core_vcn.main_vcn.id
   display_name = var.worker_subnet_display_name
 
@@ -28,7 +32,7 @@ resource "oci_core_subnet" "worker" {
 
 resource "oci_core_subnet" "public" {
   cidr_block = var.public_subnet_cidr_block
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   vcn_id = oci_core_vcn.main_vcn.id
   display_name = var.public_subnet_display_name
 

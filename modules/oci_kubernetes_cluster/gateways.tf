@@ -1,6 +1,6 @@
 resource "oci_core_internet_gateway" "public_igw" {
   #Required
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   vcn_id = oci_core_vcn.main_vcn.id
 
   #Optional
@@ -11,7 +11,7 @@ resource "oci_core_internet_gateway" "public_igw" {
 
 resource "oci_core_nat_gateway" "nat_gw" {
   #Required
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   vcn_id = oci_core_vcn.main_vcn.id
 
   #Optional

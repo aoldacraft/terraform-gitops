@@ -1,7 +1,10 @@
 #core
-variable "compartment_id" {
-  type = string
-}
+variable "tenancy_ocid" {}
+variable "user_ocid" {}
+variable "fingerprint" {}
+variable "region" {}
+variable "env" {type = string}
+variable "cidr_mid" {type = string}
 
 # control_plane
 variable "control_plane_count" {
@@ -25,4 +28,12 @@ variable "worker_shape" {
     ocpus = 2
     memory_in_gbs = 20
   }
+}
+
+# dev only
+variable "vpn_server_fqdn" {
+  type = string
+}
+variable "vpn_server_password" {
+  type = string
 }

@@ -21,7 +21,7 @@ resource "local_file" "bastion_tunneling_sh" {
 
 resource "null_resource" "init_connect" {
   triggers = {
-    tunneling = data.template_file.bastion_tunneling.id
+    inv = local.inventory
   }
   depends_on = [local_file.bastion_tunneling_sh]
   provisioner "local-exec" {
@@ -31,7 +31,7 @@ resource "null_resource" "init_connect" {
 
 resource "null_resource" "run_ansible" {
   triggers = {
-    tunneling = data.template_file.bastion_tunneling.id
+    inv = local.inventory
   }
   depends_on = [
     null_resource.init_connect

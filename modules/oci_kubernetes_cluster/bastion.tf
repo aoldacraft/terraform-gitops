@@ -1,7 +1,7 @@
 resource "oci_bastion_bastion" "control_plane_bastion" {
   #Required
   bastion_type = "STANDARD"
-  compartment_id = var.compartment_id
+  compartment_id = oci_identity_compartment.network.id
   target_subnet_id = oci_core_subnet.control_plane.id
   name = "control_plane_bastion"
 
