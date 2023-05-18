@@ -3,11 +3,8 @@ output "bastion_control_plane_session" {
 }
 
 #compartment
-output "compute_compartment" {
-  value = oci_identity_compartment.compute.id
-}
-output "network_compartment" {
-  value = oci_identity_compartment.network.id
+output "compartment_id" {
+  value = oci_identity_compartment.project.id
 }
 
 #network

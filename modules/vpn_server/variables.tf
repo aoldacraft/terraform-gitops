@@ -1,4 +1,4 @@
-variable "tenancy_id" {
+variable "compartment_id" {
   type = string
 }
 
@@ -18,6 +18,9 @@ variable "ssh_private_key_path" {
 }
 
 variable "vpn_server_fqdn" {
+  type = string
+}
+variable "admin_email" {
   type = string
 }
 variable "vpn_server_password" {

@@ -5,6 +5,7 @@ services:
     environment:
       - WG_HOST=${VPN_SERVER_ENDPOINT}
       - PASSWORD=${PASSWORD}
+      - WG_DEFAULT_DNS=${PUBLIC_IP}
     image: weejewel/wg-easy
     container_name: wg-easy
     hostname: wg-easy
@@ -26,8 +27,18 @@ services:
     hostname: nginx
     volumes:
       - ~/.nginx/servers/:/etc/nginx/servers/
-      - ./.nginx/letsencrypt/:/etc/letsencrypt/
+      - ~/.nginx/letsencrypt/:/etc/letsencrypt/
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
+    restart: unless-stopped
+
+  coredns:
+    image: coredns/coredns
+    command: -conf /etc/coredns/Corefile
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ~/:/etc/coredns
     restart: unless-stopped

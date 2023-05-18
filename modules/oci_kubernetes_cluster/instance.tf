@@ -1,7 +1,7 @@
 resource "oci_core_instance" "control_plane" {
   count = var.arm_master_count
 
-  compartment_id = oci_identity_compartment.compute.id
+  compartment_id = oci_identity_compartment.project.id
   availability_domain = data.oci_identity_availability_domains.azs.availability_domains[count.index % length(data.oci_identity_availability_domains.azs.availability_domains)].name
   display_name = "${var.control_plane_name}_${count.index + 1}"
   metadata = {
@@ -31,7 +31,7 @@ resource "oci_core_instance" "control_plane" {
 
 resource "oci_core_instance" "worker_node" {
 
-  compartment_id = oci_identity_compartment.compute.id
+  compartment_id = oci_identity_compartment.project.id
   availability_domain = data.oci_identity_availability_domains.azs.availability_domains[count.index % length(data.oci_identity_availability_domains.azs.availability_domains)].name
 
   count = var.arm_worker_count

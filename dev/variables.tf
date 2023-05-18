@@ -31,7 +31,15 @@ variable "worker_shape" {
 }
 
 # dev only
+variable "private_dns_name" {
+  type = string
+  default = "fusiocraft.in"
+}
+
 variable "vpn_server_fqdn" {
+  type = string
+}
+variable "vpn_server_admin_email" {
   type = string
 }
 variable "vpn_server_password" {

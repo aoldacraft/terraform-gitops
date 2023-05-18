@@ -1,5 +1,5 @@
 resource "oci_core_instance" "vpn_server" {
-  compartment_id = oci_identity_compartment.vpn.id
+  compartment_id = data.oci_identity_compartment.vpn.id
   availability_domain = data.oci_identity_availability_domains.azs.availability_domains[0].name
 
   display_name = "vpn-server"
@@ -23,7 +23,7 @@ resource "oci_core_instance" "vpn_server" {
 }
 
 data "oci_core_images" "vpn" {
-  compartment_id = oci_identity_compartment.vpn.id
+  compartment_id = data.oci_identity_compartment.vpn.id
   shape = var.node_shape
   operating_system = "Canonical Ubuntu"
   operating_system_version = "22.04"

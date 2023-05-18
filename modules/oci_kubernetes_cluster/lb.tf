@@ -4,7 +4,7 @@ locals{
 }
 
 resource "oci_network_load_balancer_network_load_balancer" "net_ingress_main" {
-  compartment_id = oci_identity_compartment.network.id
+  compartment_id = oci_identity_compartment.project.id
   display_name = var.lb_name
   subnet_id = oci_core_subnet.public.id
   is_private = var.env == "prod" ? false : true

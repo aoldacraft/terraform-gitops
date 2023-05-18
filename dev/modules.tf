@@ -33,8 +33,9 @@ module "vpn_server" {
   public_subnet_id        = module.kubernetes_cluster.public_subnet_id
   ssh_private_key_path    = local.default_private_key_path
   ssh_public_key_path     = local.default_public_key_path
-  tenancy_id              = var.tenancy_ocid
+  compartment_id          = module.kubernetes_cluster.compartment_id
   vcn_id                  = module.kubernetes_cluster.vcn_id
   vpn_server_fqdn         = var.vpn_server_fqdn
+  admin_email             = var.vpn_server_admin_email
   vpn_server_password     = var.vpn_server_password
 }

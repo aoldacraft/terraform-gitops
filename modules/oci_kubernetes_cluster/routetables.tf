@@ -1,5 +1,5 @@
 resource "oci_core_route_table" "public" {
-  compartment_id = oci_identity_compartment.network.id
+  compartment_id = oci_identity_compartment.project.id
   vcn_id = oci_core_vcn.main_vcn.id
 
   display_name = "public_route_table"
@@ -13,7 +13,7 @@ resource "oci_core_route_table" "public" {
 }
 
 resource "oci_core_route_table" "nat" {
-  compartment_id = oci_identity_compartment.network.id
+  compartment_id = oci_identity_compartment.project.id
   vcn_id = oci_core_vcn.main_vcn.id
 
   display_name = "nat_route_table"

@@ -1,5 +1,5 @@
 resource "oci_core_network_security_group" "vpn" {
-  compartment_id = oci_identity_compartment.vpn.id
+  compartment_id = data.oci_identity_compartment.vpn.id
   vcn_id         = data.oci_core_vcn.vpn.vcn_id
   display_name = "vpn-server"
 }
@@ -50,10 +50,37 @@ resource "oci_core_network_security_group_security_rule" "https" {
   }
 }
 
+resource "oci_core_network_security_group_security_rule" "coredns-tcp" {
+  direction = "INGRESS"
+  network_security_group_id = oci_core_network_security_group.vpn.id
+  protocol = "6" # TCP protocol
+  source = "0.0.0.0/0"
+  tcp_options {
+    destination_port_range {
+      min = 53
+      max = 53
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "coredns-udp" {
+  direction = "INGRESS"
+  network_security_group_id = oci_core_network_security_group.vpn.id
+  protocol = "17" # UDP protocol
+  source = "0.0.0.0/0"
+  udp_options {
+    destination_port_range {
+      min = 53
+      max = 53
+    }
+  }
+}
+
 resource "oci_core_network_security_group_security_rule" "wireguard" {
   direction = "INGRESS"
   network_security_group_id = oci_core_network_security_group.vpn.id
   protocol = "17" # UDP protocol
+  source = "0.0.0.0/0"
   udp_options {
     destination_port_range {
       min = 51820
