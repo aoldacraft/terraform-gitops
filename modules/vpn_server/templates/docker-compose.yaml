@@ -35,7 +35,7 @@ services:
 
   coredns:
     image: coredns/coredns
-    command: -conf /etc/coredns/Corefile
+    command: -conf /etc/coredns/Corefiles
     ports:
       - "53:53/udp"
       - "53:53/tcp"

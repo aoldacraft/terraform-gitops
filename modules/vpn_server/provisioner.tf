@@ -10,28 +10,29 @@ resource "null_resource" "provisioning" {
   }
   provisioner "file" {
     content = data.template_file.docker-compose.rendered
-    destination = "~/docker-compose.yaml"
+    destination = "/tmp/docker-compose.yaml"
   }
   provisioner "file" {
     content = data.template_file.nginx-conf.rendered
     destination = "/tmp/wg-easy.conf"
   }
   provisioner "file" {
-    source = "${path.module}/templates/init-docker.sh"
-    destination = "/tmp/init-docker.sh"
-  }
-  provisioner "file" {
     source = "${path.module}/templates/Corefile"
-    destination = "~/Corefile"
+    destination = "/tmp/Corefile"
   }
   provisioner "file" {
     content = data.template_file.install-vpn-server.rendered
-    destination = "~/init-server.sh"
+    destination = "/tmp/init-server.sh"
+  }
+  provisioner "file" {
+    source = "${path.module}/templates/init-docker.sh"
+    destination = "/tmp/init-docker.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "bash /tmp/init-docker.sh"
+      "bash /tmp/init-docker.sh",
+      "bash /tmp/init-server.sh"
     ]
   }
 }

@@ -2,6 +2,10 @@ variable "tenancy_id" {
   type = string
 }
 
+variable "domain" {
+  type = string
+}
+
 variable "env" {
   type = string
   default = "prod"

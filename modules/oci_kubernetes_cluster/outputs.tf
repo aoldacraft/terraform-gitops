@@ -2,6 +2,10 @@ output "bastion_control_plane_session" {
   value = oci_bastion_session.cp_session
 }
 
+output "domain_compartment_id" {
+  value = oci_identity_compartment.domain.id
+}
+
 #compartment
 output "compartment_id" {
   value = oci_identity_compartment.project.id

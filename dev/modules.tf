@@ -6,6 +6,7 @@ locals {
 module "kubernetes_cluster" {
   source = "../modules/oci_kubernetes_cluster"
 
+  domain = lower(var.domain)
   env = lower(var.env)
 
   tenancy_id = var.tenancy_ocid

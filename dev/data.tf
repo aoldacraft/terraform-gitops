@@ -5,3 +5,7 @@ data "oci_core_vcn" "main" {
 data "oci_core_vcn_dns_resolver_association" "main_dns" {
   vcn_id = data.oci_core_vcn.main.vcn_id
 }
+
+output "dns_resolver_association" {
+  value = data.oci_core_vcn_dns_resolver_association.main_dns
+}

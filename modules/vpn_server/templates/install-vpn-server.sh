@@ -1,9 +1,10 @@
 #!/bin/bash
-sudo usermod -aG docker $USER
-newgrp docker
+sudo cp /tmp/docker-compose.yaml ~/docker-compose.yaml
+sudo cp /tmp/Corefile ~/Corefile
+sudo cp /tmp/init-server.sh ~/init-server.sh
 
 sudo mkdir -p ~/.nginx/servers
-sudo cp /tmp/wg-easy.conf ~/.nginx/servers/
+sudo cp /tmp/wg-easy.conf ~/.nginx/servers
 
 while true; do
   IP=$(nslookup ${VPN_SERVER_ENDPOINT} | grep 'Address: ' | grep -v '#' | awk '{ print $2 }')

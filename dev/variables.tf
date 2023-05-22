@@ -3,6 +3,7 @@ variable "tenancy_ocid" {}
 variable "user_ocid" {}
 variable "fingerprint" {}
 variable "region" {}
+variable "domain" {type = string}
 variable "env" {type = string}
 variable "cidr_mid" {type = string}
 
@@ -31,11 +32,6 @@ variable "worker_shape" {
 }
 
 # dev only
-variable "private_dns_name" {
-  type = string
-  default = "fusiocraft.in"
-}
-
 variable "vpn_server_fqdn" {
   type = string
 }
