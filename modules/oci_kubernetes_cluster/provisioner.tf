@@ -2,7 +2,7 @@ locals {
   ssh_port = 9027
 }
 locals {
-  inventory = templatefile("${path.module}/templates/inventory.ini", { master_addrs = oci_core_instance.control_plane.*.private_ip, worker_addrs = oci_core_instance.worker_node.*.private_ip})
+  inventory = templatefile("${path.module}/templates/inventory.ini", { master_addrs = oci_core_instance.control_plane.*.private_ip, worker_addrs = []})
 }
 
 data "template_file" "bastion_tunneling" {

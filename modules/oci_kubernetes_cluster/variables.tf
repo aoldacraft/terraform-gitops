@@ -22,12 +22,12 @@ variable "lb_name" {
 
 variable "lb_listening_ports" {
   type = list(number)
-  default = [80]
+  default = [443]
 }
 
 variable "lb_forwarding_ports" {
   type = list(number)
-  default = [31000]
+  default = [30000]
 }
 
 ########
@@ -93,9 +93,9 @@ variable "control_plane_name" {
   default = "control_plane"
 }
 
-variable "worker_name" {
+variable "worker_pool_name" {
   type = string
-  default = "worker"
+  default = "workers"
 }
 
 variable "worker_boot_volume_size_in_gbs" {
@@ -108,12 +108,12 @@ variable "control_plane_boot_volume_size_in_gbs" {
   default = 50
 }
 
-variable "arm_master_count" {
+variable "master_count" {
   type = number
   default = 1
 }
 
-variable "arm_worker_count" {
+variable "worker_pool_node_quantity" {
   type = number
   default = 1
 }
@@ -122,27 +122,31 @@ variable "arm_node_shape" {
   type = string
   default = "VM.Standard.A1.Flex"
 }
-
-variable "arm_image_os_name" {
+variable "amd_node_shape" {
+  type = string
+  default = "VM.Standard.E4.Flex"
+}
+variable "image_os_name" {
   type = string
   default = "Canonical Ubuntu"
 }
 
-variable "arm_image_os_version" {
+variable "image_os_version" {
   type = string
   default = "20.04"
 }
 
-variable "arm_master_shape_config" {
+variable "master_shape_config" {
   default = {
     ocpus = 2
     memory_in_gbs = 4
   }
 }
-
-variable "arm_worker_shape_config" {
+variable "worker_shape_config" {
   default = {
     ocpus = 2
-    memory_in_gbs = 8
+    memory_in_gbs = 16
+    baseline = "BASELINE_1_8"
   }
 }
+
