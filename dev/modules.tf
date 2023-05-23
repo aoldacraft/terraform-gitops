@@ -19,12 +19,6 @@ module "kubernetes_cluster" {
 
   ssh_public_key_path = local.default_public_key_path
   ssh_private_key_path = local.default_private_key_path
-
-  arm_master_count = var.control_plane_count
-  arm_worker_count = var.worker_count
-
-  arm_worker_shape_config = var.worker_shape
-  worker_boot_volume_size_in_gbs = var.worker_volume
 }
 
 module "vpn_server" {
