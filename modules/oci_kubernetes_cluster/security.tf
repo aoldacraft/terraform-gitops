@@ -115,11 +115,10 @@ resource "oci_core_network_security_group_security_rule" "kubelet" {
 }
 
 resource "oci_core_network_security_group_security_rule" "nodeport_tcp" {
-  count = length(local.cidr_s)
   direction = "INGRESS"
   network_security_group_id = oci_core_network_security_group.kubernetes_node.id
   protocol = "6" # TCP protocol
-  source = local.cidr_s[count.index]
+  source = "0.0.0.0/0"
   tcp_options {
     destination_port_range {
       min = 30000
@@ -129,11 +128,10 @@ resource "oci_core_network_security_group_security_rule" "nodeport_tcp" {
 }
 
 resource "oci_core_network_security_group_security_rule" "nodeport_udp" {
-  count = length(local.cidr_s)
   direction = "INGRESS"
   network_security_group_id = oci_core_network_security_group.kubernetes_node.id
   protocol = "17" # UDP protocol
-  source = local.cidr_s[count.index]
+  source = "0.0.0.0/0"
   udp_options {
     destination_port_range {
       min = 30000
