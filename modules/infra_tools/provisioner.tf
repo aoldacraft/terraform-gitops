@@ -1,10 +1,11 @@
+/*
 resource "null_resource" "provisioning" {
   triggers = {
-    id = oci_core_instance.vpn_server.id
+    id = oci_core_instance.public_server.id
   }
   connection {
     type = "ssh"
-    host = oci_core_instance.vpn_server.public_ip
+    host = oci_core_instance.public_server.public_ip
     user = "ubuntu"
     private_key = file(var.ssh_private_key_path)
   }
@@ -14,11 +15,7 @@ resource "null_resource" "provisioning" {
   }
   provisioner "file" {
     content = data.template_file.nginx-conf.rendered
-    destination = "/tmp/wg-easy.conf"
-  }
-  provisioner "file" {
-    source = "${path.module}/templates/Corefile"
-    destination = "/tmp/Corefile"
+    destination = "/tmp/nginx.conf"
   }
   provisioner "file" {
     content = data.template_file.install-vpn-server.rendered
@@ -36,3 +33,4 @@ resource "null_resource" "provisioning" {
     ]
   }
 }
+*/

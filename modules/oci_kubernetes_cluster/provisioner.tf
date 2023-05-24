@@ -1,10 +1,10 @@
+/*
 locals {
   ssh_port = 9027
 }
 locals {
   inventory = templatefile("${path.module}/templates/inventory.ini", { master_addrs = oci_core_instance.control_plane.*.private_ip, worker_addrs = []})
 }
-
 data "template_file" "bastion_tunneling" {
   depends_on = [oci_bastion_session.cp_session, local.inventory]
   template = file("${path.module}/scripts/ssh-tunneling.sh")
@@ -67,3 +67,4 @@ resource "null_resource" "run_ansible" {
     ]
   }
 }
+*/

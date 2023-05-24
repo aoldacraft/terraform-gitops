@@ -32,7 +32,11 @@ variable "worker_shape" {
 }
 
 # dev only
-variable "vpn_server_fqdn" {
+variable "user_namespace" {
+  type = string
+}
+
+variable "tool_server_domain" {
   type = string
 }
 variable "vpn_server_admin_email" {

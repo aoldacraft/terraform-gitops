@@ -21,6 +21,8 @@ services:
       - net.ipv4.ip_forward=1
       - net.ipv4.conf.all.src_valid_mark=1
 
+
+
   nginx:
     image: weejewel/nginx-with-certbot
     container_name: nginx
@@ -31,14 +33,4 @@ services:
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
-    restart: unless-stopped
-
-  coredns:
-    image: coredns/coredns
-    command: -conf /etc/coredns/Corefiles
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-    volumes:
-      - ~/:/etc/coredns
     restart: unless-stopped

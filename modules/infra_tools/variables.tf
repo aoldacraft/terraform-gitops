@@ -17,9 +17,10 @@ variable "ssh_private_key_path" {
   type = string
 }
 
-variable "vpn_server_fqdn" {
+variable "tool_server_domain" {
   type = string
 }
+
 variable "admin_email" {
   type = string
 }
@@ -33,5 +34,11 @@ variable "boot_volume_size_in_gbs" {
 
 variable "node_shape" {
   type = string
-  default = "VM.Standard.E2.1.Micro"
+  default = "VM.Standard.A1.Flex"
+}
+variable "shape_config" {
+  default = {
+    ocpus = 4
+    memory_in_gbs = 24
+  }
 }

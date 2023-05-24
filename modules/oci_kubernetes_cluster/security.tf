@@ -1,14 +1,14 @@
 locals {
   cidr_s = [
-    oci_core_subnet.control_plane.cidr_block,
-    oci_core_subnet.worker.cidr_block,
-    oci_core_subnet.public.cidr_block
+    data.oci_core_subnet.control_plane.cidr_block,
+    data.oci_core_subnet.worker.cidr_block,
+    data.oci_core_subnet.public.cidr_block
   ]
 }
 
 resource "oci_core_network_security_group" "kubernetes_control_plane" {
-  compartment_id = oci_identity_compartment.project.id
-  vcn_id         = oci_core_vcn.main_vcn.id
+  compartment_id = data.oci_identity_compartment.env.id
+  vcn_id         = data.oci_core_vcn.prov.id
   display_name = "kubernetes_control_plane_sg"
 }
 
@@ -75,8 +75,8 @@ resource "oci_core_network_security_group_security_rule" "scheduler-api" {
 
 
 resource "oci_core_network_security_group" "kubernetes_node" {
-  compartment_id = oci_identity_compartment.project.id
-  vcn_id         = oci_core_vcn.main_vcn.id
+  compartment_id = data.oci_identity_compartment.env.id
+  vcn_id         = data.oci_core_vcn.prov.id
   display_name = "kubernetes_node_sg"
 }
 

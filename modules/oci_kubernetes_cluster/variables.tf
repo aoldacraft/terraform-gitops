@@ -2,27 +2,29 @@ variable "tenancy_id" {
   type = string
 }
 
-variable "domain" {
+variable "domain_compartment_id" {
   type = string
 }
-
-variable "env" {
+variable "env_compartment_id" {
   type = string
-  default = "prod"
 }
 
 ########
 # Loadbalancer Info
 ########
+variable "lb_is_private" {
+  type = bool
+  default = true
+}
 
 variable "lb_name" {
   type = string
-  default = "ingress_main"
+  default = "main"
 }
 
 variable "lb_listening_ports" {
   type = list(number)
-  default = [443]
+  default = [25565]
 }
 
 variable "lb_forwarding_ports" {
@@ -34,40 +36,21 @@ variable "lb_forwarding_ports" {
 # Network
 ########
 
-variable "vcn_display_name" {
-  type = string
-  default = "oci_k8s_vpc"
-}
-
-variable "vcn_cidr_block" {
+variable "vcn_id" {
   type = string
 }
 
-variable "control_plane_subnet_cidr_block" {
+variable "control_plane_subnet_id" {
   type = string
 }
-
-variable "control_plane_subnet_display_name" {
-  type = string
-  default = "control_plane"
-}
-
-variable "worker_subnet_cidr_block" {
+variable "worker_subnet_id" {
   type = string
 }
-
-variable "worker_subnet_display_name" {
-  type = string
-  default = "worker"
-}
-
-variable "public_subnet_cidr_block" {
+variable "public_subnet_id" {
   type = string
 }
-
-variable "public_subnet_display_name" {
+variable "private_subnet_id" {
   type = string
-  default = "public"
 }
 
 ########
@@ -118,14 +101,6 @@ variable "worker_pool_node_quantity" {
   default = 1
 }
 
-variable "arm_node_shape" {
-  type = string
-  default = "VM.Standard.A1.Flex"
-}
-variable "amd_node_shape" {
-  type = string
-  default = "VM.Standard.E4.Flex"
-}
 variable "image_os_name" {
   type = string
   default = "Canonical Ubuntu"
@@ -136,10 +111,15 @@ variable "image_os_version" {
   default = "20.04"
 }
 
+variable "amd_node_shape" {
+  type = string
+  default = "VM.Standard.E4.Flex"
+}
 variable "master_shape_config" {
   default = {
     ocpus = 2
     memory_in_gbs = 4
+    baseline = "BASELINE_1_8"
   }
 }
 variable "worker_shape_config" {

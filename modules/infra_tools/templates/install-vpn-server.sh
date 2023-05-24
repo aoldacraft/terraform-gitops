@@ -1,10 +1,13 @@
 #!/bin/bash
+
+sudo chmod 666 /var/run/docker.sock
+
 sudo cp /tmp/docker-compose.yaml ~/docker-compose.yaml
 sudo cp /tmp/Corefile ~/Corefile
 sudo cp /tmp/init-server.sh ~/init-server.sh
 
 sudo mkdir -p ~/.nginx/servers
-sudo cp /tmp/wg-easy.conf ~/.nginx/servers
+sudo cp /tmp/nginx.conf ~/.nginx/servers
 
 while true; do
   IP=$(nslookup ${VPN_SERVER_ENDPOINT} | grep 'Address: ' | grep -v '#' | awk '{ print $2 }')
@@ -22,15 +25,7 @@ docker-compose -f ~/docker-compose.yaml up -d
 
 sleep 15
 docker exec -it nginx /bin/sh -c '
-cp /etc/nginx/servers/wg-easy.conf /etc/nginx/conf.d/
+cp /etc/nginx/servers/nginx.conf /etc/nginx/conf.d/
 certbot --nginx --non-interactive --agree-tos -m ${ADMIN_EMAIL} -d ${VPN_SERVER_ENDPOINT}
 nginx -s reload
 '
-
-cat <<EOF | sudo tee /etc/systemd/resolved.conf
-[Resolve]
-DNSStubListener=no
-EOF
-sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
-sudo reboot
