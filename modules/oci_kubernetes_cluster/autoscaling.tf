@@ -22,7 +22,7 @@ resource "oci_autoscaling_auto_scaling_configuration" "worker_scaling" {
         metric_type = "CPU_UTILIZATION"
         threshold {
           operator = "GT"
-          value = 75
+          value = 55
         }
       }
     }
@@ -36,7 +36,7 @@ resource "oci_autoscaling_auto_scaling_configuration" "worker_scaling" {
         metric_type = "CPU_UTILIZATION"
         threshold {
           operator = "LT"
-          value = 25
+          value = 5
         }
       }
     }

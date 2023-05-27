@@ -1,3 +1,7 @@
+locals {
+  MST_FIXED_IP = var.control_plane_ip
+}
+
 resource "oci_core_instance" "control_plane" {
   count = var.master_count
 
@@ -6,9 +10,11 @@ resource "oci_core_instance" "control_plane" {
   display_name = "${var.control_plane_name}_${count.index + 1}"
   metadata = {
     ssh_authorized_keys = file(var.ssh_public_key_path)
+    user_data = base64encode(data.template_file.master_cloud_config.rendered)
   }
   create_vnic_details {
     subnet_id = data.oci_core_subnet.control_plane.id
+    private_ip = local.MST_FIXED_IP
     assign_public_ip = "false"
     nsg_ids = [
       oci_core_network_security_group.kubernetes_node.id,
@@ -30,7 +36,12 @@ resource "oci_core_instance" "control_plane" {
   }
 }
 
+## workers
+
 resource "oci_core_instance_pool" "worker_nodes" {
+  depends_on = [
+    oci_core_instance.control_plane
+  ]
   #Required
   compartment_id = data.oci_identity_compartment.env.id
   instance_configuration_id = oci_core_instance_configuration.worker_node_configuration.id
@@ -54,6 +65,7 @@ resource "oci_core_instance_pool" "worker_nodes" {
 }
 
 resource "oci_core_instance_configuration" "worker_node_configuration" {
+
   compartment_id = data.oci_identity_compartment.env.id
   display_name = "${var.worker_pool_name}-configuration"
   instance_details {
@@ -62,6 +74,7 @@ resource "oci_core_instance_configuration" "worker_node_configuration" {
       compartment_id = data.oci_identity_compartment.env.id
       metadata = {
         ssh_authorized_keys = file(var.ssh_public_key_path)
+        user_data = base64encode(data.template_file.master_cloud_config.rendered)
       }
       create_vnic_details {
         subnet_id = data.oci_core_subnet.worker.id

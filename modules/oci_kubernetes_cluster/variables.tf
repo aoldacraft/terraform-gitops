@@ -52,10 +52,18 @@ variable "public_subnet_id" {
 variable "private_subnet_id" {
   type = string
 }
+variable "control_plane_ip" {
+  type = string
+}
 
 ########
 # Auth Info
 ########
+
+variable "k8s_token" {
+  type = string
+  default = "imsecrettoken"
+}
 
 variable "ssh_public_key_path" {
   type = string
@@ -130,3 +138,8 @@ variable "worker_shape_config" {
   }
 }
 
+# etc..
+variable "k8s_version" {
+  type = string
+  default = "1.26.3-00"
+}

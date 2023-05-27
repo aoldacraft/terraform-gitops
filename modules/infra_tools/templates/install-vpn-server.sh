@@ -23,9 +23,9 @@ done
 
 docker-compose -f ~/docker-compose.yaml up -d
 
-sleep 15
-docker exec -it nginx /bin/sh -c '
-cp /etc/nginx/servers/nginx.conf /etc/nginx/conf.d/
-certbot --nginx --non-interactive --agree-tos -m ${ADMIN_EMAIL} -d ${VPN_SERVER_ENDPOINT}
-nginx -s reload
-'
+
+# docker exec -it nginx /bin/sh -c '
+# cp /etc/nginx/servers/nginx.conf /etc/nginx/conf.d/
+# certbot --nginx --non-interactive --agree-tos -m ${ADMIN_EMAIL} -d ${VPN_SERVER_ENDPOINT}
+# nginx -s reload
+# '

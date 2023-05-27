@@ -13,6 +13,11 @@ variable "control_plane_count" {
   default = 1
 }
 
+variable "k8s_token" {
+  type = string
+  default = "imsecrettoken"
+}
+
 # worker_instance
 variable "worker_count" {
   type = number

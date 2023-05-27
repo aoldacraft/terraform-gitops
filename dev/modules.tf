@@ -35,6 +35,7 @@ module "oci_cloud_core" {
 module "kubernetes_cluster" {
   source = "../modules/oci_kubernetes_cluster"
 
+  k8s_token = var.k8s_token
   ssh_public_key_path = local.default_public_key_path
   ssh_private_key_path = local.default_private_key_path
 
@@ -45,6 +46,8 @@ module "kubernetes_cluster" {
   worker_subnet_id = module.oci_cloud_core.worker_subnet_id
   public_subnet_id = module.oci_cloud_core.public_subnet_id
   private_subnet_id = module.oci_cloud_core.private_subnet_id
+
+  control_plane_ip = "172.${var.cidr_mid}.16.5"
 
   tenancy_id = var.tenancy_ocid
   vcn_id = module.oci_cloud_core.vcn_id
@@ -59,6 +62,7 @@ module "infra_tools" {
   ssh_public_key_path     = local.default_public_key_path
   compartment_id          = oci_identity_compartment.domain.id
   vcn_id                  = module.oci_cloud_core.vcn_id
+  domain = var.domain
   tool_server_domain     = var.tool_server_domain
   admin_email             = var.vpn_server_admin_email
   vpn_server_password     = var.vpn_server_password

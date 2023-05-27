@@ -17,6 +17,10 @@ variable "ssh_private_key_path" {
   type = string
 }
 
+variable "domain" {
+  type = string
+}
+
 variable "tool_server_domain" {
   type = string
 }
