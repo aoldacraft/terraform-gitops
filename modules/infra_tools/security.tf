@@ -50,31 +50,19 @@ resource "oci_core_network_security_group_security_rule" "https" {
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "coredns-tcp" {
+resource "oci_core_network_security_group_security_rule" "wireguard-web" {
   direction = "INGRESS"
   network_security_group_id = oci_core_network_security_group.vpn.id
   protocol = "6" # TCP protocol
   source = "0.0.0.0/0"
   tcp_options {
     destination_port_range {
-      min = 53
-      max = 53
+      min = 51821
+      max = 51821
     }
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "coredns-udp" {
-  direction = "INGRESS"
-  network_security_group_id = oci_core_network_security_group.vpn.id
-  protocol = "17" # UDP protocol
-  source = "0.0.0.0/0"
-  udp_options {
-    destination_port_range {
-      min = 53
-      max = 53
-    }
-  }
-}
 
 resource "oci_core_network_security_group_security_rule" "wireguard" {
   direction = "INGRESS"

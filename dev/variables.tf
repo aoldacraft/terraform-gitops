@@ -15,7 +15,7 @@ variable "control_plane_count" {
 
 variable "k8s_token" {
   type = string
-  default = "imsecrettoken"
+  default = "asd21e1dqw.adjqwdji189d1wq21"
 }
 
 # worker_instance
@@ -40,13 +40,19 @@ variable "worker_shape" {
 variable "user_namespace" {
   type = string
 }
-
 variable "tool_server_domain" {
   type = string
 }
-variable "vpn_server_admin_email" {
+variable "domain_endpoint" {
   type = string
 }
-variable "vpn_server_password" {
+variable "admin_email" {
+  type = string
+}
+variable "admin_password" {
+  type = string
+}
+
+variable "cloudflare_api_token" {
   type = string
 }

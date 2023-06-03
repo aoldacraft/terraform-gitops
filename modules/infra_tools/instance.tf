@@ -5,6 +5,7 @@ resource "oci_core_instance" "public_server" {
   display_name = "public-server"
   metadata = {
     ssh_authorized_keys = file(var.ssh_public_key_path)
+    user_data = base64encode(data.template_file.cloud_config.rendered)
   }
   create_vnic_details {
     subnet_id = data.oci_core_subnet.public.id
@@ -22,6 +23,10 @@ resource "oci_core_instance" "public_server" {
     source_id   = data.oci_core_images.vpn.images[0].id
     source_type = "image"
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
 

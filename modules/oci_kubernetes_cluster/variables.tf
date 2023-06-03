@@ -62,7 +62,7 @@ variable "control_plane_ip" {
 
 variable "k8s_token" {
   type = string
-  default = "imsecrettoken"
+  default = "asd21e1dqw.adjqwdji189d1wq21"
 }
 
 variable "ssh_public_key_path" {
@@ -133,7 +133,7 @@ variable "master_shape_config" {
 variable "worker_shape_config" {
   default = {
     ocpus = 2
-    memory_in_gbs = 16
+    memory_in_gbs = 8
     baseline = "BASELINE_1_8"
   }
 }

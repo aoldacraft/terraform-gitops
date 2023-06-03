@@ -55,15 +55,20 @@ module "kubernetes_cluster" {
 
 module "infra_tools" {
   source = "../modules/infra_tools"
-
-  boot_volume_size_in_gbs = 50
+  cloudflare_api_token    = var.cloudflare_api_token
   public_subnet_id        = module.oci_cloud_core.public_subnet_id
+
   ssh_private_key_path    = local.default_private_key_path
   ssh_public_key_path     = local.default_public_key_path
+
   compartment_id          = oci_identity_compartment.domain.id
   vcn_id                  = module.oci_cloud_core.vcn_id
-  domain = var.domain
-  tool_server_domain     = var.tool_server_domain
-  admin_email             = var.vpn_server_admin_email
-  vpn_server_password     = var.vpn_server_password
+
+  domain                  = var.domain
+  domain_endpoint         = var.domain_endpoint
+  tool_server_domain      = var.tool_server_domain
+
+  admin_email             = var.admin_email
+  admin_password          = var.admin_password
+  boot_volume_size_in_gbs = 50
 }

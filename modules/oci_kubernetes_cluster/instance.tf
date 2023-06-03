@@ -34,6 +34,7 @@ resource "oci_core_instance" "control_plane" {
     source_type = "image"
     boot_volume_size_in_gbs = var.control_plane_boot_volume_size_in_gbs
   }
+
 }
 
 ## workers
@@ -74,7 +75,7 @@ resource "oci_core_instance_configuration" "worker_node_configuration" {
       compartment_id = data.oci_identity_compartment.env.id
       metadata = {
         ssh_authorized_keys = file(var.ssh_public_key_path)
-        user_data = base64encode(data.template_file.master_cloud_config.rendered)
+        user_data = base64encode(data.template_file.worker_cloud_config.rendered)
       }
       create_vnic_details {
         subnet_id = data.oci_core_subnet.worker.id

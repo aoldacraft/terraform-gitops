@@ -1,3 +1,7 @@
+variable "cloudflare_api_token" {
+  type = string
+}
+
 variable "compartment_id" {
   type = string
 }
@@ -20,6 +24,9 @@ variable "ssh_private_key_path" {
 variable "domain" {
   type = string
 }
+variable "domain_endpoint" {
+  type = string
+}
 
 variable "tool_server_domain" {
   type = string
@@ -28,7 +35,7 @@ variable "tool_server_domain" {
 variable "admin_email" {
   type = string
 }
-variable "vpn_server_password" {
+variable "admin_password" {
   type = string
 }
 

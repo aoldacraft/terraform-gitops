@@ -7,6 +7,10 @@ terraform {
     oci = {
       source = "oracle/oci"
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 3.0"
+    }
   }
 }
 
@@ -16,4 +20,8 @@ provider "oci" {
   private_key_path= local.provider_oci_key_file_path
   fingerprint = var.fingerprint
   region = var.region
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
 }
