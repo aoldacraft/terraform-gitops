@@ -3,7 +3,7 @@
 ### Description
 IaC project to set up Dev and Prod environments on Oracle Cloud
 
-### Create Reasource (Completed - dev, prod module)
+### Create Resource (Completed - dev, prod module)
 
 <image src="./images/image.png">
 
