@@ -1,10 +1,7 @@
 # terraform-gitops
 
-### Reference
-k8s ansible: https://github.com/sigee-min/kubernetes-ansible <br/>
-
 ### Description
-IAC project to set up Dev and Prod environments on Oracle Cloud
+IaC project to set up Dev and Prod environments on Oracle Cloud
 
 ### Create Reasource (Completed - dev, prod module)
 
