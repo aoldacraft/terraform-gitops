@@ -109,6 +109,11 @@ variable "worker_pool_node_quantity" {
   default = 1
 }
 
+variable "image_id" {
+  type = string
+  default = "ocid1.image.oc1.ap-osaka-1.aaaaaaaaeq2rxo67r7ycfu3vum6gbdzdobndyhcqimh2l74eti7p5nsgftva"
+}
+
 variable "image_os_name" {
   type = string
   default = "Canonical Ubuntu"

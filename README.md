@@ -7,31 +7,8 @@ k8s ansible: https://github.com/sigee-min/kubernetes-ansible <br/>
 IAC project to set up Dev and Prod environments on Oracle Cloud
 
 ### Create Reasource (Completed - dev, prod module)
-* 1 vcn
-* 1 compartment
-* 3 Subnet (2 private, 1 public)
-* 1 NAT Gateway (2 private subnet -> public internet)
-* 1 Internet Gateway
-* 1 Bastion (ssh tunneling to control-plane)
-* 1 NLB (public internet -> k8s worker nodes, NodePort)
-* Security Groups (control plane, worker node)
-* Route tables -> NAT, IGW
-* 2 VM(default setting), 1 Control-Plane, 1 Worker-Node (ARM Arch)
 
-### Create Resource (Completed - Only dev)
-* 1 DNS (Internal)
-* 1 Vpn Server (wireguard, public)
-* Security Group (vpn server)
-
-### Not Complete or Yet
-* DNS Record
-* Harbor (swift api)
-* ArgoCD (by terraform)
-* Jenkins (terraform controller)
-* (X) OpenLDAP
-* PROD Environment
-* Cluster Autoscaler
-
+<image src="./images/image.png">
 
 
 ### Requirements

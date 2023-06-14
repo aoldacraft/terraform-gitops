@@ -4,3 +4,7 @@ data "oci_core_images" "amd_nodes" {
   operating_system = var.image_os_name
   operating_system_version = var.image_os_version
 }
+
+data "oci_core_image" "image" {
+  image_id    = var.image_id
+}

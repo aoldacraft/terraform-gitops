@@ -30,7 +30,7 @@ resource "oci_core_instance" "control_plane" {
   }
 
   source_details {
-    source_id   = data.oci_core_images.amd_nodes.images[0].id
+    source_id   = data.oci_core_image.image.image_id
     source_type = "image"
     boot_volume_size_in_gbs = var.control_plane_boot_volume_size_in_gbs
   }
@@ -93,7 +93,7 @@ resource "oci_core_instance_configuration" "worker_node_configuration" {
 
       source_details {
         source_type = "image"
-        image_id   = data.oci_core_images.amd_nodes.images[0].id
+        image_id   = data.oci_core_image.image.image_id
         boot_volume_size_in_gbs = var.worker_boot_volume_size_in_gbs
       }
     }
