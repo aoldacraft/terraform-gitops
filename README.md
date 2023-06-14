@@ -23,15 +23,24 @@ IaC project to set up Dev and Prod environments on Oracle Cloud
    ```
 2. write ./{prod,dev}/terraform.tfvars
    ```text
-   user_ocid = "{USER_OCID}"
-   fingerprint = "{FINGERPRINT}"
-   tenancy_ocid = "{TENANCY_OCID}"
-   region = "{REGION}"
+   user_ocid = "ocid1.user.oc1..."
+   fingerprint = "..."
+   tenancy_ocid = "ocid1.tenancy.oc1..aa..."
+   region = "ap-..."
    
-   vpn_server_fqdn = "{FQDN}"
-   vpn_server_admin_email = "{EMAIL}"
-   vpn_server_password = "{PASSWORD}"
+   cloudflare_api_token = "abc..."
    
+   user_namespace = "asd..."
+   tool_server_domain = "dev-blabla.com"
+   admin_email = "blabla@example.com"
+   admin_password = "blabla"
+   
+   domain = "imdomain"
+   domain_endpoint = "imdomain.com"
+   
+   env = "dev or prod"
+   cidr_mid = "10"
+   k8s_token = "07401b.f3imsecret"
    control_plane_count = 1
    worker_count = 1
    ```
